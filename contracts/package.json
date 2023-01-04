@@ -1,0 +1,19 @@
+{
+  "name": "@web3sdks/contracts",
+  "description": "Collection of smart contracts deployable via the web3sdks SDK, dashboard and CLI",
+  "version": "1.0.0",
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/web3sdks/contracts.git"
+  },
+  "bugs": {
+    "url": "https://github.com/web3sdks/contracts/issues"
+  },
+  "author": "web3sdks engineering <eng@web3sdks.com>",
+  "homepage": "https://web3sdks.com",
+  "files": [
+    "**/*.sol",
+    "/abi"
+  ]
+}
