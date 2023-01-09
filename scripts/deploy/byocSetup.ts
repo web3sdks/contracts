@@ -34,7 +34,7 @@ async function main() {
 
   // Forwarder contract needs to be deployed for the first time
   const trustedForwarder = await (await ethers.getContractFactory("ForwarderChainlessDomain")).deploy(options);
-  // const trustedForwarder = await ethers.getContractAt("ForwarderChainlessDomain", "0x9305773074C37F180992275d8Dc56Ca1251C550C");
+  // const trustedForwarder = await ethers.getContractAt("ForwarderChainlessDomain", "0x6b02587486FE607a13d6cE3A1b846736a095DA03");
   console.log("Deploying Trusted Forwarder at tx: ", trustedForwarder.deployTransaction?.hash);
   await trustedForwarder.deployed();
   console.log("Trusted Forwarder address: ", trustedForwarder.address);
@@ -46,7 +46,7 @@ async function main() {
   const contractPublisher: ContractPublisher = await ethers
     .getContractFactory("ContractPublisher")
     .then(f => f.deploy(trustedForwarder.address, prevPublisherAddress, options));
-  // const contractPublisher = await ethers.getContractAt("ContractPublisher", "0xEE4367972A21Ce1723F4fCeFe5F510f616fF6edc");
+  // const contractPublisher = await ethers.getContractAt("ContractPublisher", "0x08ccbE7d6e8b128f94C21F42FC59FBf9AcaBBbbc");
   console.log(
     "Deploying ContractPublisher at tx: ",
     contractPublisher.deployTransaction?.hash,
