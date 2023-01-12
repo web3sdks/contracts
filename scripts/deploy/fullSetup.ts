@@ -21,6 +21,7 @@ import { nativeTokenWrapper } from "../../utils/nativeTokenWrapper";
 import { SignerWithAddress } from "@nomiclabs/hardhat-ethers/signers";
 
 const GAS_LIMIT = 8_000_000; // When this value is too high, some chains will report a "ProviderError: HttpProviderError" error
+const USE_DEPLOY_OPTIONS = false;
 
 var needPack = true;
 var needGrantRole = true;
@@ -38,9 +39,9 @@ var deployContracts = {
       "4002": "0xC82Cef7e15871A96E528356409A177cD00fc81F1", // fantom_testnet
       "43114": "0xC82Cef7e15871A96E528356409A177cD00fc81F1", // avax
       "43113": "0xC82Cef7e15871A96E528356409A177cD00fc81F1", // avax_testnet
-      "42161": "", // arbitrum
+      "42161": "0xC82Cef7e15871A96E528356409A177cD00fc81F1", // arbitrum
       "421613": "0xC82Cef7e15871A96E528356409A177cD00fc81F1", // arbitrum_goerli
-      "10": "", // optimism
+      "10": "0xC82Cef7e15871A96E528356409A177cD00fc81F1", // optimism
       "420": "0xC82Cef7e15871A96E528356409A177cD00fc81F1", // optimism_goerli
       "56": "0xC82Cef7e15871A96E528356409A177cD00fc81F1", // binance
       "97": "0xC82Cef7e15871A96E528356409A177cD00fc81F1", // binance_testnet
@@ -59,9 +60,9 @@ var deployContracts = {
       "4002": "0x5fd766aD7E861d12D3aBd6428fF19E363BDB8b7b", // fantom_testnet
       "43114": "0x5fd766aD7E861d12D3aBd6428fF19E363BDB8b7b", // avax
       "43113": "0x5fd766aD7E861d12D3aBd6428fF19E363BDB8b7b", // avax_testnet
-      "42161": "", // arbitrum
+      "42161": "0x2b115B27cD07385BfeC7E1b9483C9520Ec625E65", // arbitrum
       "421613": "0x5fd766aD7E861d12D3aBd6428fF19E363BDB8b7b", // arbitrum_goerli
-      "10": "", // optimism
+      "10": "0x5fd766aD7E861d12D3aBd6428fF19E363BDB8b7b", // optimism
       "420": "0x5fd766aD7E861d12D3aBd6428fF19E363BDB8b7b", // optimism_goerli
       "56": "0x5fd766aD7E861d12D3aBd6428fF19E363BDB8b7b", // binance
       "97": "0x5fd766aD7E861d12D3aBd6428fF19E363BDB8b7b", // binance_testnet
@@ -75,7 +76,7 @@ var deployContracts = {
   "TWFactory": {
     "className": "TWFactory",
     "deployedAddresses": {
-      "1": "", // mainnet
+      "1": "0xD9CEE8cB329Ea726F92A87Dc118A39Db3b93250B", // mainnet
       "5": "0x52C60a2C70aB8c06AEe58f0ccb39bcf0eB919A21", // goerli
       "137": "0x52C60a2C70aB8c06AEe58f0ccb39bcf0eB919A21", // polygon
       "80001": "0x52C60a2C70aB8c06AEe58f0ccb39bcf0eB919A21", // mumbai
@@ -83,9 +84,9 @@ var deployContracts = {
       "4002": "0x52C60a2C70aB8c06AEe58f0ccb39bcf0eB919A21", // fantom_testnet
       "43114": "0x52C60a2C70aB8c06AEe58f0ccb39bcf0eB919A21", // avax
       "43113": "0x52C60a2C70aB8c06AEe58f0ccb39bcf0eB919A21", // avax_testnet
-      "42161": "", // arbitrum
+      "42161": "0xC611709B38ab817f2201D6bb8C64D6DbF76EEe18", // arbitrum
       "421613": "0x52C60a2C70aB8c06AEe58f0ccb39bcf0eB919A21", // arbitrum_goerli
-      "10": "", // optimism
+      "10": "0x52C60a2C70aB8c06AEe58f0ccb39bcf0eB919A21", // optimism
       "420": "0x52C60a2C70aB8c06AEe58f0ccb39bcf0eB919A21", // optimism_goerli
       "56": "0x52C60a2C70aB8c06AEe58f0ccb39bcf0eB919A21", // binance
       "97": "0x52C60a2C70aB8c06AEe58f0ccb39bcf0eB919A21", // binance_testnet
@@ -102,7 +103,7 @@ var deployContracts = {
   "TWFee": {
     "className": "TWFee",
     "deployedAddresses": {
-      "1": "", // mainnet
+      "1": "0xe254b1b2F45DE3674A52331a96D9ad0797C064Bd", // mainnet
       "5": "0x2b115B27cD07385BfeC7E1b9483C9520Ec625E65", // goerli
       "137": "0x2b115B27cD07385BfeC7E1b9483C9520Ec625E65", // polygon
       "80001": "0x2b115B27cD07385BfeC7E1b9483C9520Ec625E65", // mumbai
@@ -110,9 +111,9 @@ var deployContracts = {
       "4002": "0x2b115B27cD07385BfeC7E1b9483C9520Ec625E65", // fantom_testnet
       "43114": "0x2b115B27cD07385BfeC7E1b9483C9520Ec625E65", // avax
       "43113": "0x2b115B27cD07385BfeC7E1b9483C9520Ec625E65", // avax_testnet
-      "42161": "", // arbitrum
+      "42161": "0x106a6080ef4889458D25f4404a88f20B5b30f560", // arbitrum
       "421613": "0x2b115B27cD07385BfeC7E1b9483C9520Ec625E65", // arbitrum_goerli
-      "10": "", // optimism
+      "10": "0x2b115B27cD07385BfeC7E1b9483C9520Ec625E65", // optimism
       "420": "0x2b115B27cD07385BfeC7E1b9483C9520Ec625E65", // optimism_goerli
       "56": "0x2b115B27cD07385BfeC7E1b9483C9520Ec625E65", // binance
       "97": "0x2b115B27cD07385BfeC7E1b9483C9520Ec625E65", // binance_testnet
@@ -131,7 +132,7 @@ var deployContracts = {
   "DropERC721": {
     "className": "DropERC721",
     "deployedAddresses": {
-      "1": "", // mainnet
+      "1": "0xF2CF34a9928a6aB04881bfEaAC5BedB6d05Abc27", // mainnet
       "5": "0xC611709B38ab817f2201D6bb8C64D6DbF76EEe18", // goerli
       "137": "0x106a6080ef4889458D25f4404a88f20B5b30f560", // polygon
       "80001": "0xC611709B38ab817f2201D6bb8C64D6DbF76EEe18", // mumbai
@@ -139,9 +140,9 @@ var deployContracts = {
       "4002": "0xC611709B38ab817f2201D6bb8C64D6DbF76EEe18", // fantom_testnet
       "43114": "0xC611709B38ab817f2201D6bb8C64D6DbF76EEe18", // avax
       "43113": "0xBF2d2c61a52a0Bb19626C6D00113672C566DfD65", // avax_testnet
-      "42161": "", // arbitrum
+      "42161": "0x3B32f5132EE1BaC2CBbb431C9A68D0841985c41b", // arbitrum
       "421613": "0xC611709B38ab817f2201D6bb8C64D6DbF76EEe18", // arbitrum_goerli
-      "10": "", // optimism
+      "10": "0xC611709B38ab817f2201D6bb8C64D6DbF76EEe18", // optimism
       "420": "0xC611709B38ab817f2201D6bb8C64D6DbF76EEe18", // optimism_goerli
       "56": "0xC611709B38ab817f2201D6bb8C64D6DbF76EEe18", // binance
       "97": "0xC611709B38ab817f2201D6bb8C64D6DbF76EEe18", // binance_testnet
@@ -154,7 +155,7 @@ var deployContracts = {
   "DropERC1155": {
     "className": "DropERC1155",
     "deployedAddresses": {
-      "1": "", // mainnet
+      "1": "0xbc3D10e91D5fE510f6Fa8C8c4e285B9811BC928c", // mainnet
       "5": "0xBF2d2c61a52a0Bb19626C6D00113672C566DfD65", // goerli
       "137": "0xBF2d2c61a52a0Bb19626C6D00113672C566DfD65", // polygon
       "80001": "0xBF2d2c61a52a0Bb19626C6D00113672C566DfD65", // mumbai
@@ -162,9 +163,9 @@ var deployContracts = {
       "4002": "0xBF2d2c61a52a0Bb19626C6D00113672C566DfD65", // fantom_testnet
       "43114": "0xBF2d2c61a52a0Bb19626C6D00113672C566DfD65", // avax
       "43113": "0x7d2dc0109C4a0251A626c3F728b7cC14407665F2", // avax_testnet
-      "42161": "", // arbitrum
+      "42161": "0xBF2d2c61a52a0Bb19626C6D00113672C566DfD65", // arbitrum
       "421613": "0xBF2d2c61a52a0Bb19626C6D00113672C566DfD65", // arbitrum_goerli
-      "10": "", // optimism
+      "10": "0xBF2d2c61a52a0Bb19626C6D00113672C566DfD65", // optimism
       "420": "0xBF2d2c61a52a0Bb19626C6D00113672C566DfD65", // optimism_goerli
       "56": "0xBF2d2c61a52a0Bb19626C6D00113672C566DfD65", // binance
       "97": "0xBF2d2c61a52a0Bb19626C6D00113672C566DfD65", // binance_testnet
@@ -177,7 +178,7 @@ var deployContracts = {
   "DropERC20": {
     "className": "DropERC20",
     "deployedAddresses": {
-      "1": "", // mainnet
+      "1": "0x5e1c754f28b7E8458Ec4E440F9187856bfeb048c", // mainnet
       "5": "0x7d2dc0109C4a0251A626c3F728b7cC14407665F2", // goerli
       "137": "0x7d2dc0109C4a0251A626c3F728b7cC14407665F2", // polygon
       "80001": "0x7d2dc0109C4a0251A626c3F728b7cC14407665F2", // mumbai
@@ -185,9 +186,9 @@ var deployContracts = {
       "4002": "0x7d2dc0109C4a0251A626c3F728b7cC14407665F2", // fantom_testnet
       "43114": "0x7d2dc0109C4a0251A626c3F728b7cC14407665F2", // avax
       "43113": "0x13B55C4573f75BE7124196E76A4e51a6f0b56dE4", // avax_testnet
-      "42161": "", // arbitrum
+      "42161": "0x7d2dc0109C4a0251A626c3F728b7cC14407665F2", // arbitrum
       "421613": "0x7d2dc0109C4a0251A626c3F728b7cC14407665F2", // arbitrum_goerli
-      "10": "", // optimism
+      "10": "0x7d2dc0109C4a0251A626c3F728b7cC14407665F2", // optimism
       "420": "0x7d2dc0109C4a0251A626c3F728b7cC14407665F2", // optimism_goerli
       "56": "0x7d2dc0109C4a0251A626c3F728b7cC14407665F2", // binance
       "97": "0x7d2dc0109C4a0251A626c3F728b7cC14407665F2", // binance_testnet
@@ -200,7 +201,7 @@ var deployContracts = {
   "TokenERC20": {
     "className": "TokenERC20",
     "deployedAddresses": {
-      "1": "", // mainnet
+      "1": "0x217c57B53b1E3E67a8F7EBF8CEF377e385E90ea6", // mainnet
       "5": "0x13B55C4573f75BE7124196E76A4e51a6f0b56dE4", // goerli
       "137": "0x13B55C4573f75BE7124196E76A4e51a6f0b56dE4", // polygon
       "80001": "0x13B55C4573f75BE7124196E76A4e51a6f0b56dE4", // mumbai
@@ -208,9 +209,9 @@ var deployContracts = {
       "4002": "0x13B55C4573f75BE7124196E76A4e51a6f0b56dE4", // fantom_testnet
       "43114": "0x13B55C4573f75BE7124196E76A4e51a6f0b56dE4", // avax
       "43113": "0x70CE7258a420303238336491a8d96c4A6dDbE549", // avax_testnet
-      "42161": "", // arbitrum
+      "42161": "0x13B55C4573f75BE7124196E76A4e51a6f0b56dE4", // arbitrum
       "421613": "0x13B55C4573f75BE7124196E76A4e51a6f0b56dE4", // arbitrum_goerli
-      "10": "", // optimism
+      "10": "0x13B55C4573f75BE7124196E76A4e51a6f0b56dE4", // optimism
       "420": "0x13B55C4573f75BE7124196E76A4e51a6f0b56dE4", // optimism_goerli
       "56": "0x13B55C4573f75BE7124196E76A4e51a6f0b56dE4", // binance
       "97": "0x13B55C4573f75BE7124196E76A4e51a6f0b56dE4", // binance_testnet
@@ -231,9 +232,9 @@ var deployContracts = {
       "4002": "0x70CE7258a420303238336491a8d96c4A6dDbE549", // fantom_testnet
       "43114": "0x70CE7258a420303238336491a8d96c4A6dDbE549", // avax
       "43113": "0x6D6EB73F013FF6996E1BbacC63697b7E0c0C15cF", // avax_testnet
-      "42161": "", // arbitrum
+      "42161": "0x70CE7258a420303238336491a8d96c4A6dDbE549", // arbitrum
       "421613": "0x70CE7258a420303238336491a8d96c4A6dDbE549", // arbitrum_goerli
-      "10": "", // optimism
+      "10": "0x70CE7258a420303238336491a8d96c4A6dDbE549", // optimism
       "420": "0x70CE7258a420303238336491a8d96c4A6dDbE549", // optimism_goerli
       "56": "0x70CE7258a420303238336491a8d96c4A6dDbE549", // binance
       "97": "0x70CE7258a420303238336491a8d96c4A6dDbE549", // binance_testnet
@@ -254,9 +255,9 @@ var deployContracts = {
       "4002": "0x6D6EB73F013FF6996E1BbacC63697b7E0c0C15cF", // fantom_testnet
       "43114": "0x6D6EB73F013FF6996E1BbacC63697b7E0c0C15cF", // avax
       "43113": "0xE4fA40390d2C99A77B2ae202d0fe2132B38D03D8", // avax_testnet
-      "42161": "", // arbitrum
+      "42161": "0x6D6EB73F013FF6996E1BbacC63697b7E0c0C15cF", // arbitrum
       "421613": "0x6D6EB73F013FF6996E1BbacC63697b7E0c0C15cF", // arbitrum_goerli
-      "10": "", // optimism
+      "10": "0x6D6EB73F013FF6996E1BbacC63697b7E0c0C15cF", // optimism
       "420": "0x6D6EB73F013FF6996E1BbacC63697b7E0c0C15cF", // optimism_goerli
       "56": "0x6D6EB73F013FF6996E1BbacC63697b7E0c0C15cF", // binance
       "97": "0x6D6EB73F013FF6996E1BbacC63697b7E0c0C15cF", // binance_testnet
@@ -277,9 +278,9 @@ var deployContracts = {
       "4002": "0xE4fA40390d2C99A77B2ae202d0fe2132B38D03D8", // fantom_testnet
       "43114": "0xE4fA40390d2C99A77B2ae202d0fe2132B38D03D8", // avax
       "43113": "0xf5D96665eaa9F3Fd7Bcac8DAf0ed5f4A23010d7D", // avax_testnet
-      "42161": "", // arbitrum
+      "42161": "0xE4fA40390d2C99A77B2ae202d0fe2132B38D03D8", // arbitrum
       "421613": "0xE4fA40390d2C99A77B2ae202d0fe2132B38D03D8", // arbitrum_goerli
-      "10": "", // optimism
+      "10": "0xE4fA40390d2C99A77B2ae202d0fe2132B38D03D8", // optimism
       "420": "0xE4fA40390d2C99A77B2ae202d0fe2132B38D03D8", // optimism_goerli
       "56": "0xE4fA40390d2C99A77B2ae202d0fe2132B38D03D8", // binance
       "97": "0xE4fA40390d2C99A77B2ae202d0fe2132B38D03D8", // binance_testnet
@@ -300,9 +301,9 @@ var deployContracts = {
       "4002": "0x106a6080ef4889458D25f4404a88f20B5b30f560", // fantom_testnet
       "43114": "0xf5D96665eaa9F3Fd7Bcac8DAf0ed5f4A23010d7D", // avax
       "43113": "0x05A47fB0d4D77e570D6b084Bf1D868FBd84a6540", // avax_testnet
-      "42161": "", // arbitrum
+      "42161": "0xf5D96665eaa9F3Fd7Bcac8DAf0ed5f4A23010d7D", // arbitrum
       "421613": "0xf5D96665eaa9F3Fd7Bcac8DAf0ed5f4A23010d7D", // arbitrum_goerli
-      "10": "", // optimism
+      "10": "0xf5D96665eaa9F3Fd7Bcac8DAf0ed5f4A23010d7D", // optimism
       "420": "0xf5D96665eaa9F3Fd7Bcac8DAf0ed5f4A23010d7D", // optimism_goerli
       "56": "0xf5D96665eaa9F3Fd7Bcac8DAf0ed5f4A23010d7D", // binance
       "97": "0xf5D96665eaa9F3Fd7Bcac8DAf0ed5f4A23010d7D", // binance_testnet
@@ -328,9 +329,9 @@ var deployContracts = {
       "4002": "0x05A47fB0d4D77e570D6b084Bf1D868FBd84a6540", // fantom_testnet
       "43114": "0x05A47fB0d4D77e570D6b084Bf1D868FBd84a6540", // avax
       "43113": "0x75D991f47D2129a8c45d074A30fE218ed3de98F3", // avax_testnet
-      "42161": "", // arbitrum
+      "42161": "0x05A47fB0d4D77e570D6b084Bf1D868FBd84a6540", // arbitrum
       "421613": "0x05A47fB0d4D77e570D6b084Bf1D868FBd84a6540", // arbitrum_goerli
-      "10": "", // optimism
+      "10": "0x05A47fB0d4D77e570D6b084Bf1D868FBd84a6540", // optimism
       "420": "0x05A47fB0d4D77e570D6b084Bf1D868FBd84a6540", // optimism_goerli
       "56": "0x05A47fB0d4D77e570D6b084Bf1D868FBd84a6540", // binance
       "97": "0x05A47fB0d4D77e570D6b084Bf1D868FBd84a6540", // binance_testnet
@@ -351,9 +352,9 @@ var deployContracts = {
       "4002": "0x75D991f47D2129a8c45d074A30fE218ed3de98F3", // fantom_testnet
       "43114": "0x75D991f47D2129a8c45d074A30fE218ed3de98F3", // avax
       "43113": "0xD9CEE8cB329Ea726F92A87Dc118A39Db3b93250B", // avax_testnet
-      "42161": "", // arbitrum
+      "42161": "0x75D991f47D2129a8c45d074A30fE218ed3de98F3", // arbitrum
       "421613": "0x75D991f47D2129a8c45d074A30fE218ed3de98F3", // arbitrum_goerli
-      "10": "", // optimism
+      "10": "0x75D991f47D2129a8c45d074A30fE218ed3de98F3", // optimism
       "420": "0x75D991f47D2129a8c45d074A30fE218ed3de98F3", // optimism_goerli
       "56": "0x75D991f47D2129a8c45d074A30fE218ed3de98F3", // binance
       "97": "0x75D991f47D2129a8c45d074A30fE218ed3de98F3", // binance_testnet
@@ -379,9 +380,9 @@ var deployContracts = {
       "4002": "0xD9CEE8cB329Ea726F92A87Dc118A39Db3b93250B", // fantom_testnet
       "43114": "0xD9CEE8cB329Ea726F92A87Dc118A39Db3b93250B", // avax
       "43113": "0xe254b1b2F45DE3674A52331a96D9ad0797C064Bd", // avax_testnet
-      "42161": "", // arbitrum
+      "42161": "0xD9CEE8cB329Ea726F92A87Dc118A39Db3b93250B", // arbitrum
       "421613": "0xD9CEE8cB329Ea726F92A87Dc118A39Db3b93250B", // arbitrum_goerli
-      "10": "", // optimism
+      "10": "0xD9CEE8cB329Ea726F92A87Dc118A39Db3b93250B", // optimism
       "420": "0xD9CEE8cB329Ea726F92A87Dc118A39Db3b93250B", // optimism_goerli
       "56": "0xD9CEE8cB329Ea726F92A87Dc118A39Db3b93250B", // binance
       "97": "0xD9CEE8cB329Ea726F92A87Dc118A39Db3b93250B", // binance_testnet
@@ -402,9 +403,9 @@ var deployContracts = {
       "4002": "0xe254b1b2F45DE3674A52331a96D9ad0797C064Bd", // fantom_testnet
       "43114": "0xe254b1b2F45DE3674A52331a96D9ad0797C064Bd", // avax
       "43113": "0xF2CF34a9928a6aB04881bfEaAC5BedB6d05Abc27", // avax_testnet
-      "42161": "", // arbitrum
+      "42161": "0xe254b1b2F45DE3674A52331a96D9ad0797C064Bd", // arbitrum
       "421613": "0xe254b1b2F45DE3674A52331a96D9ad0797C064Bd", // arbitrum_goerli
-      "10": "", // optimism
+      "10": "0xe254b1b2F45DE3674A52331a96D9ad0797C064Bd", // optimism
       "420": "0xe254b1b2F45DE3674A52331a96D9ad0797C064Bd", // optimism_goerli
       "56": "0xe254b1b2F45DE3674A52331a96D9ad0797C064Bd", // binance
       "97": "0xe254b1b2F45DE3674A52331a96D9ad0797C064Bd", // binance_testnet
@@ -425,9 +426,9 @@ var deployContracts = {
       "4002": "0xF2CF34a9928a6aB04881bfEaAC5BedB6d05Abc27", // fantom_testnet
       "43114": "0xF2CF34a9928a6aB04881bfEaAC5BedB6d05Abc27", // avax
       "43113": "0xbc3D10e91D5fE510f6Fa8C8c4e285B9811BC928c", // avax_testnet
-      "42161": "", // arbitrum
+      "42161": "0xF2CF34a9928a6aB04881bfEaAC5BedB6d05Abc27", // arbitrum
       "421613": "0xF2CF34a9928a6aB04881bfEaAC5BedB6d05Abc27", // arbitrum_goerli
-      "10": "", // optimism
+      "10": "0xF2CF34a9928a6aB04881bfEaAC5BedB6d05Abc27", // optimism
       "420": "0xF2CF34a9928a6aB04881bfEaAC5BedB6d05Abc27", // optimism_goerli
       "56": "0xF2CF34a9928a6aB04881bfEaAC5BedB6d05Abc27", // binance
       "97": "0xF2CF34a9928a6aB04881bfEaAC5BedB6d05Abc27", // binance_testnet
@@ -448,9 +449,9 @@ var deployContracts = {
       "4002": "0xbc3D10e91D5fE510f6Fa8C8c4e285B9811BC928c", // fantom_testnet
       "43114": "0xbc3D10e91D5fE510f6Fa8C8c4e285B9811BC928c", // avax
       "43113": "0x5e1c754f28b7E8458Ec4E440F9187856bfeb048c", // avax_testnet
-      "42161": "", // arbitrum
+      "42161": "0xbc3D10e91D5fE510f6Fa8C8c4e285B9811BC928c", // arbitrum
       "421613": "0xbc3D10e91D5fE510f6Fa8C8c4e285B9811BC928c", // arbitrum_goerli
-      "10": "", // optimism
+      "10": "0xbc3D10e91D5fE510f6Fa8C8c4e285B9811BC928c", // optimism
       "420": "0xbc3D10e91D5fE510f6Fa8C8c4e285B9811BC928c", // optimism_goerli
       "56": "0xbc3D10e91D5fE510f6Fa8C8c4e285B9811BC928c", // binance
       "97": "0xbc3D10e91D5fE510f6Fa8C8c4e285B9811BC928c", // binance_testnet
@@ -472,9 +473,9 @@ var deployContracts = {
       "4002": "0x29ce93BAD941e89b4661121195275C1132e777FE", // fantom_testnet
       "43114": "0x29ce93BAD941e89b4661121195275C1132e777FE", // avax
       "43113": "0x170F1B2E15262860E65296A213Bff22f2378E189", // avax_testnet
-      "42161": "", // arbitrum
+      "42161": "0x29ce93BAD941e89b4661121195275C1132e777FE", // arbitrum
       "421613": "0x29ce93BAD941e89b4661121195275C1132e777FE", // arbitrum_goerli
-      "10": "", // optimism
+      "10": "0x29ce93BAD941e89b4661121195275C1132e777FE", // optimism
       "420": "0x29ce93BAD941e89b4661121195275C1132e777FE", // optimism_goerli
       "56": "0x29ce93BAD941e89b4661121195275C1132e777FE", // binance
       "97": "0x29ce93BAD941e89b4661121195275C1132e777FE", // binance_testnet
@@ -495,9 +496,9 @@ var deployContracts = {
       "4002": "0x170F1B2E15262860E65296A213Bff22f2378E189", // fantom_testnet
       "43114": "0x170F1B2E15262860E65296A213Bff22f2378E189", // avax
       "43113": "0x9762ec95fc18FCbAe018d8f99D81FDBDE34019EF", // avax_testnet
-      "42161": "", // arbitrum
+      "42161": "0x170F1B2E15262860E65296A213Bff22f2378E189", // arbitrum
       "421613": "0x170F1B2E15262860E65296A213Bff22f2378E189", // arbitrum_goerli
-      "10": "", // optimism
+      "10": "0x170F1B2E15262860E65296A213Bff22f2378E189", // optimism
       "420": "0x170F1B2E15262860E65296A213Bff22f2378E189", // optimism_goerli
       "56": "0x170F1B2E15262860E65296A213Bff22f2378E189", // binance
       "97": "0x170F1B2E15262860E65296A213Bff22f2378E189", // binance_testnet
@@ -520,9 +521,9 @@ var deployContracts = {
       "4002": "0x9762ec95fc18FCbAe018d8f99D81FDBDE34019EF", // fantom_testnet
       "43114": "0x9762ec95fc18FCbAe018d8f99D81FDBDE34019EF", // avax
       "43113": "0x0183EaFfF53061DfA5E1Ee2a528c30E140ab41CE", // avax_testnet
-      "42161": "", // arbitrum
+      "42161": "0x9762ec95fc18FCbAe018d8f99D81FDBDE34019EF", // arbitrum
       "421613": "0x9762ec95fc18FCbAe018d8f99D81FDBDE34019EF", // arbitrum_goerli
-      "10": "", // optimism
+      "10": "0x9762ec95fc18FCbAe018d8f99D81FDBDE34019EF", // optimism
       "420": "0x9762ec95fc18FCbAe018d8f99D81FDBDE34019EF", // optimism_goerli
       "56": "0x9762ec95fc18FCbAe018d8f99D81FDBDE34019EF", // binance
       "97": "0x9762ec95fc18FCbAe018d8f99D81FDBDE34019EF", // binance_testnet
@@ -545,9 +546,9 @@ var deployContracts = {
       "4002": "0x0183EaFfF53061DfA5E1Ee2a528c30E140ab41CE", // fantom_testnet
       "43114": "0x0183EaFfF53061DfA5E1Ee2a528c30E140ab41CE", // avax
       "43113": "0x106a6080ef4889458D25f4404a88f20B5b30f560", // avax_testnet
-      "42161": "", // arbitrum
+      "42161": "0x0183EaFfF53061DfA5E1Ee2a528c30E140ab41CE", // arbitrum
       "421613": "0x0183EaFfF53061DfA5E1Ee2a528c30E140ab41CE", // arbitrum_goerli
-      "10": "", // optimism
+      "10": "0x0183EaFfF53061DfA5E1Ee2a528c30E140ab41CE", // optimism
       "420": "0x0183EaFfF53061DfA5E1Ee2a528c30E140ab41CE", // optimism_goerli
       "56": "0x0183EaFfF53061DfA5E1Ee2a528c30E140ab41CE", // binance
       "97": "0x0183EaFfF53061DfA5E1Ee2a528c30E140ab41CE", // binance_testnet
@@ -616,10 +617,16 @@ async function deploy(chainId, caller, options, forExtra) {
       if (typeof(params) == 'function') {
         params = params(chainId, caller);
       }
-      contract = params && params.length > 0
-        ? await (await ethers.getContractFactory(className)).deploy(...params, options)
-        : await (await ethers.getContractFactory(className)).deploy(options);
-      console.log(`${name} is being deployed at tx: `, contract.deployTransaction?.hash);
+      if (USE_DEPLOY_OPTIONS && options) {
+        contract = params && params.length > 0
+          ? await (await ethers.getContractFactory(className)).deploy(...params, options)
+          : await (await ethers.getContractFactory(className)).deploy(options);
+      } else {
+        contract = params && params.length > 0
+          ? await (await ethers.getContractFactory(className)).deploy(...params)
+          : await (await ethers.getContractFactory(className)).deploy();
+      }
+      console.log(`${name} is being deployed at tx: `, contract.deployTransaction?.hash, ", at nonce: ", contract.deployTransaction?.nonce);
       await contract.deployed();
       deployContracts[name]["deployedAddresses"][chainId] = contract.address;
       console.log(`${name} successfully deployed, address: ${contract.address}`);
@@ -639,10 +646,11 @@ async function deploy(chainId, caller, options, forExtra) {
 async function main() {
   // Deploy FeeType
   const options = {
-    //maxFeePerGas: ethers.utils.parseUnits("50", "gwei"),
-    //maxPriorityFeePerGas: ethers.utils.parseUnits("50", "gwei"),
+    //maxFeePerGas: ethers.utils.parseUnits("20", "gwei"),
+    //maxPriorityFeePerGas: ethers.utils.parseUnits("1.5", "gwei"),
     //gasPrice: ethers.utils.parseUnits("100", "gwei"),
     gasLimit: GAS_LIMIT,
+    //nonce: 21,
   };
 
   const [caller]: SignerWithAddress[] = await ethers.getSigners();
