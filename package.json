@@ -66,5 +66,8 @@
     "forge:build": "forge build --hardhat",
     "forge:test": "forge test --hardhat",
     "export-abi": "hardhat export-abi"
+  },
+  "publishConfig": {
+	"access": "public"
   }
 }
